@@ -121,9 +121,6 @@ body,
     cursor: pointer;
 }
 
-.main-nav {
-    /* centered by header grid */
-}
 
 .nav-list {
     display: flex;
