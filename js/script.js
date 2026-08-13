@@ -63,16 +63,12 @@ navLinks.forEach((link) => {
 // Active Navigation
 // ================================
 
-// ================================
-// Active Navigation
-// ================================
-
 const sections = document.querySelectorAll('section[id]');
 const header = document.querySelector('.site-header');
 
 function updateActiveNav() {
     const headerHeight = header ? header.offsetHeight : 84;
-    const scrollPosition = window.scrollY + headerHeight + 80;
+    const scrollPosition = window.scrollY + headerHeight + 20;
 
     let currentSection = null;
 
