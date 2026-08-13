@@ -49,6 +49,12 @@ if (menuToggle && navList) {
 navLinks.forEach((link) => {
     link.addEventListener('click', () => {
         setMenuState(false);
+
+        navLinks.forEach((item) => {
+            item.classList.remove('active');
+        });
+
+        link.classList.add('active');
     });
 });
 
@@ -57,59 +63,70 @@ navLinks.forEach((link) => {
 // Active Navigation
 // ================================
 
+// ================================
+// Active Navigation
+// ================================
+
 const sections = document.querySelectorAll('section[id]');
-
-const sectionLinks = new Map();
-
-navLinks.forEach((link) => {
-    const href = link.getAttribute('href');
-
-    if (href && href.startsWith('#')) {
-        sectionLinks.set(href.substring(1), link);
-    }
-});
-
 const header = document.querySelector('.site-header');
 
-const getHeaderHeight = () => {
-    return header ? header.offsetHeight : 84;
-};
+function updateActiveNav() {
+    const headerHeight = header ? header.offsetHeight : 84;
+    const scrollPosition = window.scrollY + headerHeight + 80;
 
-const sectionObserver = new IntersectionObserver(
-    (entries) => {
-        const visibleSections = entries
-            .filter((entry) => entry.isIntersecting)
-            .sort(
-                (a, b) =>
-                    Math.abs(a.boundingClientRect.top - getHeaderHeight()) -
-                    Math.abs(b.boundingClientRect.top - getHeaderHeight())
-            );
+    let currentSection = null;
 
-        if (!visibleSections.length) return;
+    sections.forEach((section) => {
+        const sectionTop = section.offsetTop;
+        const sectionBottom = sectionTop + section.offsetHeight;
 
-        const activeSection = visibleSections[0].target;
+        if (
+            scrollPosition >= sectionTop &&
+            scrollPosition < sectionBottom
+        ) {
+            currentSection = section;
+        }
+    });
 
-        navLinks.forEach((link) => {
-            link.classList.remove('active');
-        });
+    // If we're at the bottom of the page,
+    // make the last section active.
+    if (
+        window.innerHeight + window.scrollY >=
+        document.documentElement.scrollHeight - 10
+    ) {
+        currentSection = sections[sections.length - 1];
+    }
 
-        const activeLink = sectionLinks.get(activeSection.id);
+    navLinks.forEach((link) => {
+        link.classList.remove('active');
+    });
+
+    if (currentSection) {
+        const activeLink = document.querySelector(
+            `.nav-link[href="#${currentSection.id}"]`
+        );
 
         if (activeLink) {
             activeLink.classList.add('active');
         }
-    },
-    {
-        root: null,
-        rootMargin: `-${getHeaderHeight()}px 0px -50% 0px`,
-        threshold: 0
     }
-);
+}
 
-sections.forEach((section) => {
-    sectionObserver.observe(section);
+let ticking = false;
+
+window.addEventListener('scroll', () => {
+    if (!ticking) {
+        window.requestAnimationFrame(() => {
+            updateActiveNav();
+            ticking = false;
+        });
+
+        ticking = true;
+    }
 });
 
+// Set the correct active link on page load
+updateActiveNav();
 
 // ================================
 // Scroll Reveal
