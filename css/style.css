@@ -472,6 +472,14 @@ body,
     gap: 1.25rem;
 }
 
+.project-type {
+    display: block;
+    margin: .35rem 0 .9rem;
+    color: var(--text-muted);
+    font-size: .85rem;
+    letter-spacing: .05em;
+}
+
 .project-card {
     display: grid;
     gap: 1rem;
@@ -496,24 +504,6 @@ body,
     object-fit: cover;
     object-position: center;
 }
-
-.project-image-1 {
-    /* background: var(--surface-soft); */
-    /* background-image: url(../assets/images/desktop-design.jpg); */
-}
-
-/* 
-.project-image-2 {
-    background: var(--surface-soft);
-}
-
-.project-image-3 {
-    background: var(--surface-soft);
-}
-
-.project-image-4 {
-    background: var(--surface-soft);
-} */
 
 .project-copy {
     padding: 1.4rem 1.5rem 1.5rem;
@@ -547,18 +537,43 @@ body,
 
 .service-item {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 1rem 1.2rem;
-    border-radius: 12px;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+
+    padding: 1.75rem;
+
+    background: var(--surface);
+    color: var(--text-secondary);
+
+    border: 1px solid var(--border);
+    border-radius: 1.5rem;
+
+    text-align: left;
+
+    transition:
+        transform 0.3s ease,
+        background-color 0.3s ease,
+        border-color 0.3s ease;
+}
+
+.service-item:hover {
+    transform: translateY(-5px);
     background: var(--surface-soft);
-    color: var(--text-muted);
+    border-color: var(--accent);
+}
+
+.service-item h3 {
+    margin: 0 0 0.8rem;
+    color: var(--text);
+    font-size: 1.2rem;
+}
+
+.service-item p {
+    margin: 0;
+    color: var(--text-secondary);
+    line-height: 1.7;
     font-size: 0.95rem;
-    flex: 1;
-    min-width: 150px;
-    text-align: center;
-    cursor: pointer;
-    transition: all 0.3s ease;
 }
 
 .service-item:hover {
@@ -602,10 +617,9 @@ body,
 }
 
 .services-grid {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1.2rem;
-    justify-content: center;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.25rem;
 }
 
 .skill-card {
@@ -645,6 +659,10 @@ body,
     gap: 1.25rem;
 }
 
+.testimonial-card {
+    grid-column: 1 / -1;
+}
+
 .about-card,
 .experience-card,
 .testimonial-card,
@@ -653,6 +671,13 @@ body,
     background: var(--surface);
     border: 1px solid var(--border);
     border-radius: 1.75rem;
+}
+
+.contact-text {
+    max-width: 600px;
+    margin: 1rem 0 1.5rem;
+    color: var(--text-secondary);
+    line-height: 1.7;
 }
 
 .contact-card {
@@ -669,8 +694,8 @@ body,
 }
 
 .contact-section .contact-card {
-    background: var(--accent-soft);
-    border-color: var(--accent);
+    background: var(--surface);
+    border-color: var(--border);
 }
 
 .contact-section .contact-card h2 {
@@ -744,7 +769,7 @@ body,
 
 .contact-info {
     display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 1.5rem;
     margin-top: 2rem;
 }
@@ -803,6 +828,63 @@ body,
     color: var(--text-muted);
     margin-top: 2rem;
     font-size: 0.95rem;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 2rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--border);
+}
+
+.footer-name {
+    margin: 1rem 0 0.25rem;
+    color: var(--text);
+    font-weight: 600;
+}
+
+.footer-role {
+    margin: 0;
+    color: var(--text-muted);
+}
+
+.footer-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+}
+
+.footer-nav a {
+    color: var(--text-secondary);
+    transition: color 0.3s ease;
+}
+
+.footer-nav a:hover {
+    color: var(--accent);
+}
+
+.footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    padding-top: 1.5rem;
+}
+
+.footer-copy {
+    margin: 0;
+    color: var(--text-muted);
+}
+
+.back-to-top {
+    color: var(--accent);
+    font-weight: 600;
+}
+
+.back-to-top:hover {
+    text-decoration: underline;
 }
 
 /* Accessibility: reduced motion */
@@ -898,6 +980,10 @@ body,
     .contact-card {
         grid-template-columns: 1fr;
     }
+
+    .services-grid {
+        grid-template-columns: 1fr;
+    }
 }
 
 
@@ -988,6 +1074,10 @@ body,
 
     .services-grid {
         flex-direction: column;
+    }
+
+    .service-item {
+        min-height: auto;
     }
 
     .contact-info {
@@ -1099,6 +1189,15 @@ body,
     .footer-nav,
     .footer-social {
         gap: 0.75rem;
+    }
+
+    .footer-content,
+    .footer-bottom {
+        flex-direction: column;
+    }
+
+    .footer-nav {
+        gap: 1rem;
     }
 }
 
