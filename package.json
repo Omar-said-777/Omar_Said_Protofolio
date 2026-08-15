@@ -1,0 +1,23 @@
+{
+  "name": "omar-said-portfolio",
+  "version": "1.0.0",
+  "description": "Omar Said - Front-End Developer Portfolio",
+  "scripts": {
+    "dev": "npx serve .",
+    "build": "echo 'Static site - no build needed'",
+    "lint": "echo 'No linter configured'"
+  },
+  "keywords": [
+    "portfolio",
+    "frontend",
+    "developer"
+  ],
+  "author": "Omar Said",
+  "license": "MIT",
+  "dependencies": {
+    "@vercel/analytics": "^1.4.1"
+  },
+  "devDependencies": {
+    "serve": "^14.2.4"
+  }
+}
